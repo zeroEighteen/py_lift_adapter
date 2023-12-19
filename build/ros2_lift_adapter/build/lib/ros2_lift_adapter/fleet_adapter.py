@@ -118,24 +118,22 @@ def main():
         time.sleep(2)
         print("Awaiting command...")
 
+        CURRENT_LIFT_STATE = sim.get_lift_state()
+
         if REQ_HANDLER.lift_queue_is_empty() == False:
             CURRENT_REQUEST_ID = REQ_HANDLER.get_lift_requests_queue()[0]
             CURRENT_REQUEST_DATA = REQ_HANDLER.get_lift_requests_list()[0]
 
-        CURRENT_LIFT_STATE = sim.get_lift_state()
+            # Get new request from the ros2 subprocess
+            requestData = sim.ROS2FleetHandler.get_request_data()
+            if requestData != None: # If the list of request data isnt empty,
+                for data in requestData:
+                    sim.generate_lift_request(data["request_level"], data["destination_level"]) # create new lift request with given data
 
-        # Get new request from the ros2 subprocess
-        requestData = sim.ROS2FleetHandler.get_request_data()
-        if requestData != None: # If the list of request data isnt empty,
-            for data in requestData:
-                sim.generate_lift_request(data["request_level"], data["destination_level"]) # create new lift request with given data
-
-        # Publish to fleet manager if lift has reached requested level and doors are opne
-        if (CURRENT_REQUEST_DATA["request_level"] == CURRENT_LIFT_STATE["level"]) and (CURRENT_LIFT_STATE == "O"):
-            sim.ROS2FleetHandler.publish_lift_state_to_fleet_manager(sim.lift_state)
-
-        # If Lift Request Queue is not empty, publish new lift request
-        if len(REQ_HANDLER.get_lift_requests_queue()) != 0:
+            # Publish to fleet manager if lift has reached requested level and doors are opne
+            if (CURRENT_REQUEST_DATA["request_level"] == CURRENT_LIFT_STATE["level"]) and (CURRENT_LIFT_STATE == "O"):
+                sim.ROS2FleetHandler.publish_lift_state_to_fleet_manager(sim.lift_state)
+            
             sim.publish_lift_request(mqttClient, CURRENT_REQUEST_DATA)
 
         if sim.check_connection() == False:
