@@ -2,7 +2,7 @@
 import sqlite3
 import paho.mqtt.client as mqtt
 import time
-from multiprocessing import Process, Queue, Pipe
+import os
 
 # ROS2 Stuff
 import rclpy
@@ -27,7 +27,8 @@ TOPICS = {
 
 REQ_HANDLER = RequestHandler.RequestHandler()
 
-DB_PATH = "./../data/lift_example.db" # To Update
+CURRENT_DIRECTORY = os.getcwd()
+DB_PATH = os.path.join(CURRENT_DIRECTORY, "src", "ros2_lift_adapter", "ros2_lift_adapter", "data", "lift_requests.db")
 
 class FleetAdapter(mqtt_client.MQTTClient):
     def __init__(self, IP, port):
