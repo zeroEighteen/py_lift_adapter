@@ -1,0 +1,61 @@
+running egg_info
+creating ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info
+writing ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/PKG-INFO
+writing dependency_links to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/dependency_links.txt
+writing entry points to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/entry_points.txt
+writing requirements to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/requires.txt
+writing top-level names to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/top_level.txt
+writing manifest file '../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/SOURCES.txt'
+reading manifest file '../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/SOURCES.txt'
+writing manifest file '../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build
+creating /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib
+creating /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+copying ros2_lift_adapter/fleet_adapter.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+copying ros2_lift_adapter/listener.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+copying ros2_lift_adapter/ros2_fleet.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+copying ros2_lift_adapter/lift_adapter_sim.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+copying ros2_lift_adapter/db.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+copying ros2_lift_adapter/lift_request_handler.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+copying ros2_lift_adapter/ros2_lift.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+copying ros2_lift_adapter/ros2_sim_handler.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+copying ros2_lift_adapter/__init__.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+copying ros2_lift_adapter/mqtt_client.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+copying ros2_lift_adapter/ros2_sim_gui.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+running install
+running install_lib
+creating /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/fleet_adapter.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/listener.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/ros2_fleet.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/lift_adapter_sim.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/db.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/lift_request_handler.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/ros2_lift.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/ros2_sim_handler.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/__init__.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/mqtt_client.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/ros2_sim_gui.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/fleet_adapter.py to fleet_adapter.cpython-310.pyc
+byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/listener.py to listener.cpython-310.pyc
+byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/ros2_fleet.py to ros2_fleet.cpython-310.pyc
+byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/lift_adapter_sim.py to lift_adapter_sim.cpython-310.pyc
+byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/db.py to db.cpython-310.pyc
+byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/lift_request_handler.py to lift_request_handler.cpython-310.pyc
+byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/ros2_lift.py to ros2_lift.cpython-310.pyc
+byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/ros2_sim_handler.py to ros2_sim_handler.cpython-310.pyc
+byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/mqtt_client.py to mqtt_client.cpython-310.pyc
+byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/ros2_sim_gui.py to ros2_sim_gui.cpython-310.pyc
+running install_data
+creating /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/share/ament_index
+creating /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/share/ament_index/resource_index
+creating /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/share/ament_index/resource_index/packages
+copying resource/ros2_lift_adapter -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/share/ament_index/resource_index/packages
+copying package.xml -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/share/ros2_lift_adapter
+running install_egg_info
+Copying ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info to /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter-0.0.0-py3.10.egg-info
+running install_scripts
+writing list of installed files to '/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/install.log'

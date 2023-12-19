@@ -1,0 +1,84 @@
+[0.000000] (-) TimerEvent: {}
+[0.002082] (ros2_lift_adapter) JobQueued: {'identifier': 'ros2_lift_adapter', 'dependencies': OrderedDict()}
+[0.002249] (ros2_lift_adapter) JobStarted: {'identifier': 'ros2_lift_adapter'}
+[0.099693] (-) TimerEvent: {}
+[0.200551] (-) TimerEvent: {}
+[0.301708] (-) TimerEvent: {}
+[0.402824] (-) TimerEvent: {}
+[0.503563] (-) TimerEvent: {}
+[0.604247] (-) TimerEvent: {}
+[0.704914] (-) TimerEvent: {}
+[0.805848] (-) TimerEvent: {}
+[0.906642] (-) TimerEvent: {}
+[1.007272] (-) TimerEvent: {}
+[1.107918] (-) TimerEvent: {}
+[1.208610] (-) TimerEvent: {}
+[1.309278] (-) TimerEvent: {}
+[1.409937] (-) TimerEvent: {}
+[1.510703] (-) TimerEvent: {}
+[1.611338] (-) TimerEvent: {}
+[1.712004] (-) TimerEvent: {}
+[1.812922] (-) TimerEvent: {}
+[1.914228] (-) TimerEvent: {}
+[2.015027] (-) TimerEvent: {}
+[2.116222] (-) TimerEvent: {}
+[2.217041] (-) TimerEvent: {}
+[2.317943] (-) TimerEvent: {}
+[2.418638] (-) TimerEvent: {}
+[2.519349] (-) TimerEvent: {}
+[2.620013] (-) TimerEvent: {}
+[2.720658] (-) TimerEvent: {}
+[2.821335] (-) TimerEvent: {}
+[2.921966] (-) TimerEvent: {}
+[3.022632] (-) TimerEvent: {}
+[3.123274] (-) TimerEvent: {}
+[3.223943] (-) TimerEvent: {}
+[3.324660] (-) TimerEvent: {}
+[3.425333] (-) TimerEvent: {}
+[3.526237] (-) TimerEvent: {}
+[3.626999] (-) TimerEvent: {}
+[3.727762] (-) TimerEvent: {}
+[3.828898] (-) TimerEvent: {}
+[3.930882] (-) TimerEvent: {}
+[3.977500] (ros2_lift_adapter) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/ros2_lift_adapter', 'build', '--build-base', '/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build', 'install', '--record', '/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/install.log', '--single-version-externally-managed'], 'cwd': '/home/dsta-intern-fleet/py_lift_adapter/src/ros2_lift_adapter', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'LANGUAGE': 'en_SG:en', 'USER': 'dsta-intern-fleet', 'XDG_SESSION_TYPE': 'wayland', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/dsta-intern-fleet', 'OLDPWD': '/home/dsta-intern-fleet/py_lift_adapter/src', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'SYSTEMD_EXEC_PID': '3418', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/home/dsta-intern-fleet/py_lift_adapter/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'dsta-intern-fleet', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'dsta-intern-fleet', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/dstainternfleet-desktop:@/tmp/.ICE-unix/1240,unix/dstainternfleet-desktop:/tmp/.ICE-unix/1240', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/9bf2a476_4427_4efa_a38d_d03adc817ef0', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_SG.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.R9TFG2', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'GNOME_TERMINAL_SERVICE': ':1.138', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/humble:/home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/prefix_override:/home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages:/home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages', 'COLCON': '1', 'VTE_VERSION': '6800'}, 'shell': False}
+[4.031071] (-) TimerEvent: {}
+[4.131772] (-) TimerEvent: {}
+[4.232456] (-) TimerEvent: {}
+[4.333163] (-) TimerEvent: {}
+[4.433891] (-) TimerEvent: {}
+[4.534568] (-) TimerEvent: {}
+[4.635275] (-) TimerEvent: {}
+[4.736035] (-) TimerEvent: {}
+[4.836890] (-) TimerEvent: {}
+[4.937554] (-) TimerEvent: {}
+[5.038302] (-) TimerEvent: {}
+[5.139016] (-) TimerEvent: {}
+[5.239910] (-) TimerEvent: {}
+[5.271867] (ros2_lift_adapter) StdoutLine: {'line': b'running egg_info\n'}
+[5.275034] (ros2_lift_adapter) StdoutLine: {'line': b'writing ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/PKG-INFO\n'}
+[5.276516] (ros2_lift_adapter) StdoutLine: {'line': b'writing dependency_links to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/dependency_links.txt\n'}
+[5.277568] (ros2_lift_adapter) StdoutLine: {'line': b'writing entry points to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/entry_points.txt\n'}
+[5.278498] (ros2_lift_adapter) StdoutLine: {'line': b'writing requirements to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/requires.txt\n'}
+[5.279256] (ros2_lift_adapter) StdoutLine: {'line': b'writing top-level names to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/top_level.txt\n'}
+[5.292082] (ros2_lift_adapter) StdoutLine: {'line': b"reading manifest file '../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/SOURCES.txt'\n"}
+[5.297238] (ros2_lift_adapter) StdoutLine: {'line': b"writing manifest file '../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/SOURCES.txt'\n"}
+[5.298091] (ros2_lift_adapter) StdoutLine: {'line': b'running build\n'}
+[5.298708] (ros2_lift_adapter) StdoutLine: {'line': b'running build_py\n'}
+[5.305567] (ros2_lift_adapter) StdoutLine: {'line': b'running install\n'}
+[5.311846] (ros2_lift_adapter) StdoutLine: {'line': b'running install_lib\n'}
+[5.320772] (ros2_lift_adapter) StdoutLine: {'line': b'running install_data\n'}
+[5.324015] (ros2_lift_adapter) StdoutLine: {'line': b'running install_egg_info\n'}
+[5.332783] (ros2_lift_adapter) StdoutLine: {'line': b"removing '/home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[5.334701] (ros2_lift_adapter) StdoutLine: {'line': b'Copying ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info to /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter-0.0.0-py3.10.egg-info\n'}
+[5.340142] (-) TimerEvent: {}
+[5.342393] (ros2_lift_adapter) StdoutLine: {'line': b'running install_scripts\n'}
+[5.440202] (ros2_lift_adapter) StdoutLine: {'line': b'Installing listener script to /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/ros2_lift_adapter\n'}
+[5.440993] (-) TimerEvent: {}
+[5.443594] (ros2_lift_adapter) StdoutLine: {'line': b"writing list of installed files to '/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/install.log'\n"}
+[5.541339] (-) TimerEvent: {}
+[5.611081] (ros2_lift_adapter) CommandEnded: {'returncode': 0}
+[5.641544] (-) TimerEvent: {}
+[5.742483] (-) TimerEvent: {}
+[5.843745] (-) TimerEvent: {}
+[5.886404] (ros2_lift_adapter) JobEnded: {'identifier': 'ros2_lift_adapter', 'rc': 0}
+[5.889741] (-) EventReactorShutdown: {}

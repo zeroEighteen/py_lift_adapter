@@ -1,0 +1,69 @@
+[0.000000] (-) TimerEvent: {}
+[0.001649] (ros2_lift_adapter) JobQueued: {'identifier': 'ros2_lift_adapter', 'dependencies': OrderedDict()}
+[0.002271] (ros2_lift_adapter) JobStarted: {'identifier': 'ros2_lift_adapter'}
+[0.098707] (-) TimerEvent: {}
+[0.200443] (-) TimerEvent: {}
+[0.301273] (-) TimerEvent: {}
+[0.401981] (-) TimerEvent: {}
+[0.502668] (-) TimerEvent: {}
+[0.603377] (-) TimerEvent: {}
+[0.704041] (-) TimerEvent: {}
+[0.804697] (-) TimerEvent: {}
+[0.905344] (-) TimerEvent: {}
+[1.006047] (-) TimerEvent: {}
+[1.106725] (-) TimerEvent: {}
+[1.207659] (-) TimerEvent: {}
+[1.308798] (-) TimerEvent: {}
+[1.409798] (-) TimerEvent: {}
+[1.510590] (-) TimerEvent: {}
+[1.611359] (-) TimerEvent: {}
+[1.712302] (-) TimerEvent: {}
+[1.813180] (-) TimerEvent: {}
+[1.913871] (-) TimerEvent: {}
+[2.014552] (-) TimerEvent: {}
+[2.115271] (-) TimerEvent: {}
+[2.215974] (-) TimerEvent: {}
+[2.316704] (-) TimerEvent: {}
+[2.417466] (-) TimerEvent: {}
+[2.518426] (-) TimerEvent: {}
+[2.619174] (-) TimerEvent: {}
+[2.720120] (-) TimerEvent: {}
+[2.821652] (-) TimerEvent: {}
+[2.922145] (ros2_lift_adapter) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/ros2_lift_adapter', 'build', '--build-base', '/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build', 'install', '--record', '/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/install.log', '--single-version-externally-managed'], 'cwd': '/home/dsta-intern-fleet/py_lift_adapter/src/ros2_lift_adapter', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'LANGUAGE': 'en_SG:en', 'USER': 'dsta-intern-fleet', 'XDG_SESSION_TYPE': 'wayland', 'SHLVL': '1', 'HOME': '/home/dsta-intern-fleet', 'OLDPWD': '/home/dsta-intern-fleet/py_lift_adapter/src', 'DESKTOP_SESSION': 'ubuntu', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'SYSTEMD_EXEC_PID': '3418', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'LOGNAME': 'dsta-intern-fleet', '_': '/usr/bin/colcon', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'dsta-intern-fleet', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/dstainternfleet-desktop:@/tmp/.ICE-unix/1240,unix/dstainternfleet-desktop:/tmp/.ICE-unix/1240', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/9bf2a476_4427_4efa_a38d_d03adc817ef0', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_SG.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.R9TFG2', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'GNOME_TERMINAL_SERVICE': ':1.138', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'COLCON': '1', 'VTE_VERSION': '6800', 'PYTHONPATH': '/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/prefix_override:/home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages:'}, 'shell': False}
+[2.927641] (-) TimerEvent: {}
+[3.039641] (-) TimerEvent: {}
+[3.140694] (-) TimerEvent: {}
+[3.241389] (-) TimerEvent: {}
+[3.342057] (-) TimerEvent: {}
+[3.442770] (-) TimerEvent: {}
+[3.543475] (-) TimerEvent: {}
+[3.644190] (-) TimerEvent: {}
+[3.745088] (-) TimerEvent: {}
+[3.845793] (-) TimerEvent: {}
+[3.946477] (-) TimerEvent: {}
+[3.966164] (ros2_lift_adapter) StdoutLine: {'line': b'running egg_info\n'}
+[3.968378] (ros2_lift_adapter) StdoutLine: {'line': b'writing ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/PKG-INFO\n'}
+[3.969467] (ros2_lift_adapter) StdoutLine: {'line': b'writing dependency_links to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/dependency_links.txt\n'}
+[3.970400] (ros2_lift_adapter) StdoutLine: {'line': b'writing entry points to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/entry_points.txt\n'}
+[3.971258] (ros2_lift_adapter) StdoutLine: {'line': b'writing requirements to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/requires.txt\n'}
+[3.971963] (ros2_lift_adapter) StdoutLine: {'line': b'writing top-level names to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/top_level.txt\n'}
+[3.980474] (ros2_lift_adapter) StdoutLine: {'line': b"reading manifest file '../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/SOURCES.txt'\n"}
+[3.986301] (ros2_lift_adapter) StdoutLine: {'line': b"writing manifest file '../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/SOURCES.txt'\n"}
+[3.987162] (ros2_lift_adapter) StdoutLine: {'line': b'running build\n'}
+[3.987783] (ros2_lift_adapter) StdoutLine: {'line': b'running build_py\n'}
+[3.992188] (ros2_lift_adapter) StdoutLine: {'line': b'running install\n'}
+[3.993740] (ros2_lift_adapter) StdoutLine: {'line': b'running install_lib\n'}
+[4.003481] (ros2_lift_adapter) StdoutLine: {'line': b'running install_data\n'}
+[4.005817] (ros2_lift_adapter) StdoutLine: {'line': b'running install_egg_info\n'}
+[4.019761] (ros2_lift_adapter) StdoutLine: {'line': b"removing '/home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[4.021481] (ros2_lift_adapter) StdoutLine: {'line': b'Copying ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info to /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter-0.0.0-py3.10.egg-info\n'}
+[4.026753] (ros2_lift_adapter) StdoutLine: {'line': b'running install_scripts\n'}
+[4.046651] (-) TimerEvent: {}
+[4.113815] (ros2_lift_adapter) StdoutLine: {'line': b"writing list of installed files to '/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/install.log'\n"}
+[4.146982] (-) TimerEvent: {}
+[4.247944] (-) TimerEvent: {}
+[4.283492] (ros2_lift_adapter) CommandEnded: {'returncode': 0}
+[4.348084] (-) TimerEvent: {}
+[4.448921] (-) TimerEvent: {}
+[4.461932] (ros2_lift_adapter) JobEnded: {'identifier': 'ros2_lift_adapter', 'rc': 0}
+[4.464906] (-) EventReactorShutdown: {}

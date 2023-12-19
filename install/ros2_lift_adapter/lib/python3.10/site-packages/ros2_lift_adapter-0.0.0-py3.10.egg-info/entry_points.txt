@@ -1,0 +1,7 @@
+[console_scripts]
+fleet_adapter = ros2_lift_adapter.fleet_adapter:main
+lift_adapter_sim = ros2_lift_adapter.lift_adapter_sim:main
+listener = ros2_lift_adapter.listener:main
+ros2_sim_gui = ros2_lift_adapter.ros2_sim_gui:main
+ros2_sim_handler = ros2_lift_adapter.ros2_sim_handler:main
+

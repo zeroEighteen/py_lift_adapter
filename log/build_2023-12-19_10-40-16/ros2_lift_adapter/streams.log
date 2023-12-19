@@ -1,0 +1,63 @@
+[4.042s] Invoking command in '/home/dsta-intern-fleet/py_lift_adapter/src/ros2_lift_adapter': PYTHONPATH=/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/prefix_override:/home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/ros2_lift_adapter build --build-base /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build install --record /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/install.log --single-version-externally-managed
+[5.372s] running egg_info
+[5.375s] creating ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info
+[5.376s] writing ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/PKG-INFO
+[5.378s] writing dependency_links to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/dependency_links.txt
+[5.379s] writing entry points to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/entry_points.txt
+[5.380s] writing requirements to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/requires.txt
+[5.380s] writing top-level names to ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/top_level.txt
+[5.381s] writing manifest file '../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/SOURCES.txt'
+[5.390s] reading manifest file '../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/SOURCES.txt'
+[5.394s] writing manifest file '../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info/SOURCES.txt'
+[5.395s] running build
+[5.396s] running build_py
+[5.397s] creating /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build
+[5.398s] creating /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib
+[5.398s] creating /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+[5.399s] copying ros2_lift_adapter/fleet_adapter.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+[5.399s] copying ros2_lift_adapter/listener.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+[5.400s] copying ros2_lift_adapter/ros2_fleet.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+[5.401s] copying ros2_lift_adapter/lift_adapter_sim.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+[5.402s] copying ros2_lift_adapter/db.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+[5.407s] copying ros2_lift_adapter/lift_request_handler.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+[5.410s] copying ros2_lift_adapter/ros2_lift.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+[5.413s] copying ros2_lift_adapter/ros2_sim_handler.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+[5.414s] copying ros2_lift_adapter/__init__.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+[5.414s] copying ros2_lift_adapter/mqtt_client.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+[5.415s] copying ros2_lift_adapter/ros2_sim_gui.py -> /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter
+[5.417s] running install
+[5.418s] running install_lib
+[5.423s] creating /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+[5.424s] copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/fleet_adapter.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+[5.425s] copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/listener.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+[5.426s] copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/ros2_fleet.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+[5.427s] copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/lift_adapter_sim.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+[5.428s] copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/db.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+[5.429s] copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/lift_request_handler.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+[5.430s] copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/ros2_lift.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+[5.431s] copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/ros2_sim_handler.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+[5.432s] copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/__init__.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+[5.433s] copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/mqtt_client.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+[5.434s] copying /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build/lib/ros2_lift_adapter/ros2_sim_gui.py -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter
+[5.438s] byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/fleet_adapter.py to fleet_adapter.cpython-310.pyc
+[5.443s] byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/listener.py to listener.cpython-310.pyc
+[5.445s] byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/ros2_fleet.py to ros2_fleet.cpython-310.pyc
+[5.448s] byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/lift_adapter_sim.py to lift_adapter_sim.cpython-310.pyc
+[5.453s] byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/db.py to db.cpython-310.pyc
+[5.456s] byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/lift_request_handler.py to lift_request_handler.cpython-310.pyc
+[5.459s] byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/ros2_lift.py to ros2_lift.cpython-310.pyc
+[5.461s] byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/ros2_sim_handler.py to ros2_sim_handler.cpython-310.pyc
+[5.463s] byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/__init__.py to __init__.cpython-310.pyc
+[5.464s] byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/mqtt_client.py to mqtt_client.cpython-310.pyc
+[5.466s] byte-compiling /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter/ros2_sim_gui.py to ros2_sim_gui.cpython-310.pyc
+[5.469s] running install_data
+[5.472s] creating /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/share/ament_index
+[5.473s] creating /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/share/ament_index/resource_index
+[5.473s] creating /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/share/ament_index/resource_index/packages
+[5.474s] copying resource/ros2_lift_adapter -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/share/ament_index/resource_index/packages
+[5.474s] copying package.xml -> /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/share/ros2_lift_adapter
+[5.475s] running install_egg_info
+[5.483s] Copying ../../build/ros2_lift_adapter/ros2_lift_adapter.egg-info to /home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages/ros2_lift_adapter-0.0.0-py3.10.egg-info
+[5.489s] running install_scripts
+[5.581s] writing list of installed files to '/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/install.log'
+[5.755s] Invoked command in '/home/dsta-intern-fleet/py_lift_adapter/src/ros2_lift_adapter' returned '0': PYTHONPATH=/home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/prefix_override:/home/dsta-intern-fleet/py_lift_adapter/install/ros2_lift_adapter/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/ros2_lift_adapter build --build-base /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/build install --record /home/dsta-intern-fleet/py_lift_adapter/build/ros2_lift_adapter/install.log --single-version-externally-managed
