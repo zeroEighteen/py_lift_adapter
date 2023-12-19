@@ -94,17 +94,18 @@ class FleetAdapter(mqtt_client.MQTTClient):
         self.DB.add_new_lift_request(request)
 
     
-    def attachCallbackFunctions(self):
+    def attachCallbackFunctions(self, mqttClient):
         mqttClient.message_callback_add(TOPICS["Fleet Lift State"], self.update_lift_state)
 
-if __name__ == "__main__":
+def main():
+    IP_ADDRESS = "10.168.2.219"
     mqttClient = mqtt.Client("fleet_adapter") # Create client object
-    sim = FleetAdapter("192.168.18.3", 1883)
+    sim = FleetAdapter(IP_ADDRESS, 1883)
 
     # Attach on_connect and on_disconnect functionsde
     mqttClient.on_connect = sim.on_connected
     mqttClient.on_disconnect = sim.on_disconnected
-    sim.attachCallbackFunctions()
+    sim.attachCallbackFunctions(mqttClient)
 
     # Connect and start loop + subscribe to topic
     mqttClient.connect(sim.IP_ADDRESS, sim.PORT)
@@ -137,3 +138,5 @@ if __name__ == "__main__":
 
         if sim.check_connection() == False:
             print("Connection lost. Attempting to reconnect")
+if __name__ == "__main__":
+    main()
