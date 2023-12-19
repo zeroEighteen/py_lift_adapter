@@ -125,7 +125,7 @@ def main():
             CURRENT_REQUEST_DATA = REQ_HANDLER.get_lift_requests_list()[0]
 
             # Get new request from the ros2 subprocess
-            requestData = sim.ROS2FleetHandler.get_request_data()
+            requestData = ros2_fleet.get_request_data(sim.ROS2FleetHandler)
             if requestData != None: # If the list of request data isnt empty,
                 for data in requestData:
                     sim.generate_lift_request(data["request_level"], data["destination_level"]) # create new lift request with given data

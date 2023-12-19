@@ -36,14 +36,6 @@ class FleetROS2Handler(Node):
         self.request_data_queue.append(request_data)
 
     # Returns all items in queue
-    def get_request_data(self) -> list:
-        if len(self.request_data_queue) == 0: #  If queue length is 0, do not update this queue
-            return None
-        else:
-            temp = copy.deepcopy(self.request_data_queue)
-            self.request_data_queue = []
-            return temp
-
     def publish_lift_state_to_fleet_manager(self, liftState):
         # Handle logic of what lift state is on the other side, not here
         # here, just take it as the door is open and we gotta broadcast to fleet manager to ask it to move the robot
@@ -68,6 +60,15 @@ def main(args=None):
     fleet_ros2_handler.destroy_node()
     rclpy.shutdown()
 
+def check_for_subscriptions(node):
+    # Spin the ndoe once
+    rclpy.spin_once(node, timeout_sec=1.0)
+    if len(node.request_data_queue) == 0: #  If queue length is 0, do not update this queue
+        return None
+    else:
+        temp = copy.deepcopy(node.request_data_queue)
+        node.request_data_queue = []
+        return temp
 
 if __name__ == '__main__':
     main()
