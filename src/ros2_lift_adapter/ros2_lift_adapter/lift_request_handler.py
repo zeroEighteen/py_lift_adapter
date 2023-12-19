@@ -72,7 +72,6 @@ class RequestHandler():
         # Queuing the new lift request
         self.enqueue_lift_requests_queue(request_id)
         self.enqueue_lift_requests_list(newReq)
-        print("newReq: " + str(newReq))
 
         print(f"New Lift Request queued. \nID: {request_id} \nRequest Floor: {request_level} \nDestination Floor:{destination_level}")
         return newReq

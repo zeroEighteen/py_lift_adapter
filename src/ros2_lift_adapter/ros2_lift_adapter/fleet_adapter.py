@@ -10,7 +10,6 @@ from rclpy.node import Node
 from std_msgs.msg import String
 
 # Import modules
-print("test")
 import ros2_lift_adapter.mqtt_client as mqtt_client
 import ros2_lift_adapter.lift_request_handler as RequestHandler
 import ros2_lift_adapter.db as db
@@ -65,9 +64,7 @@ class FleetAdapter(mqtt_client.MQTTClient):
         # Change service_state to 2, indicaing request s being served
         request["service_state"] = "2"
         request_string = ""
-        print("Type of request-string: " + str(type(request_string)))
         for value in request.values():
-            print("type of value: "+ str(type(value)))
             request_string += value
             request_string += ";"
         try:
@@ -83,8 +80,6 @@ class FleetAdapter(mqtt_client.MQTTClient):
     def generate_new_request_id(self) -> str:
         # Get the most recent ID generated | format: ["request_id_here"]
         hexID = self.DB.get_latest_request_ids(1)[0][0]
-        print("hexID: " + str(hexID))
-        print("hexID type :" + str(type(hexID)))
         # Convert to dec, add one then convert back to hex
         decID = int(hexID, base=16)
         newDecID = decID + 1
@@ -121,14 +116,11 @@ def main():
     while True:
         # Delay for 2 seconds per loop
         time.sleep(2)
-        print("Awaiting command...")
-
         CURRENT_LIFT_STATE = sim.get_lift_state()
 
         # Get new request from the ros2 subprocess
         print("Checking for subscriptions")
         requestData = ros2_fleet.check_for_subscriptions(sim.ROS2FleetHandler)
-        print("Finish checking. Request data: " + str(requestData))
         if requestData != None: # If the list of request data isnt empty,
             for data in requestData:
                 sim.generate_lift_request(data["request_level"], data["destination_level"]) # create new lift request with given data
@@ -140,8 +132,6 @@ def main():
                 # Publish to fleet manager if lift has reached requested level and doors are opne
                 if (CURRENT_REQUEST_DATA["request_level"] == CURRENT_LIFT_STATE["curr_level"]) and (CURRENT_LIFT_STATE == "O"):
                     sim.ROS2FleetHandler.publish_lift_state_to_fleet_manager(sim.lift_state)
-                print("CURRENT REQUEST DATA: " + str(CURRENT_REQUEST_DATA))
-                print("type: " + str(type(CURRENT_REQUEST_DATA)))
                 sim.publish_lift_request(mqttClient, CURRENT_REQUEST_DATA)
 
         if sim.check_connection() == False:
