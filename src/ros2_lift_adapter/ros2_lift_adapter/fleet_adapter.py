@@ -118,8 +118,9 @@ def main():
         time.sleep(2)
         print("Awaiting command...")
 
-        CURRENT_REQUEST_ID = REQ_HANDLER.get_lift_requests_queue()[0]
-        CURRENT_REQUEST_DATA = REQ_HANDLER.get_lift_requests_list()[0]
+        if REQ_HANDLER.lift_queue_is_empty() == False:
+            CURRENT_REQUEST_ID = REQ_HANDLER.get_lift_requests_queue()[0]
+            CURRENT_REQUEST_DATA = REQ_HANDLER.get_lift_requests_list()[0]
 
         CURRENT_LIFT_STATE = sim.get_lift_state()
 
