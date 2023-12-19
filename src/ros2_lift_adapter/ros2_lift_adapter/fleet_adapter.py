@@ -120,17 +120,17 @@ def main():
 
         CURRENT_LIFT_STATE = sim.get_lift_state()
 
+        # Get new request from the ros2 subprocess
+        print("Checking for subscriptions")
+        requestData = ros2_fleet.check_for_subscriptions(sim.ROS2FleetHandler)
+        print("Finish checking. Request data: " + str(requestData))
+        if requestData != None: # If the list of request data isnt empty,
+            for data in requestData:
+                sim.generate_lift_request(data["request_level"], data["destination_level"]) # create new lift request with given data
+
         if REQ_HANDLER.lift_queue_is_empty() == False:
             CURRENT_REQUEST_ID = REQ_HANDLER.get_lift_requests_queue()[0]
             CURRENT_REQUEST_DATA = REQ_HANDLER.get_lift_requests_list()[0]
-
-            # Get new request from the ros2 subprocess
-            print("Checking for subscriptions")
-            requestData = ros2_fleet.check_for_subscriptions(sim.ROS2FleetHandler)
-            print("Finish checking. Request data: " + str(requestData))
-            if requestData != None: # If the list of request data isnt empty,
-                for data in requestData:
-                    sim.generate_lift_request(data["request_level"], data["destination_level"]) # create new lift request with given data
 
             # Publish to fleet manager if lift has reached requested level and doors are opne
             if (CURRENT_REQUEST_DATA["request_level"] == CURRENT_LIFT_STATE["level"]) and (CURRENT_LIFT_STATE == "O"):
