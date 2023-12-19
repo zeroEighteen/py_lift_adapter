@@ -3,12 +3,12 @@ import paho.mqtt.client as mqtt # Using Paho MQTT Python client
 import time
 
 # Import modules
-import mqtt_client
-import lift_request_handler as RequestHandler
-import db
+import ros2_lift_adapter.mqtt_client as mqtt_client
+import ros2_lift_adapter.lift_request_handler as RequestHandler
+import ros2_lift_adapter.db as db
 
 # Import ROS2 Modules
-import ros2_lift
+import ros2_lift_adapter.ros2_lift as ros2_lift
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
