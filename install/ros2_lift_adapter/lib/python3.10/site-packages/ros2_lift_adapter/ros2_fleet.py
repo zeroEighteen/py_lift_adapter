@@ -60,11 +60,13 @@ def main(args=None):
     fleet_ros2_handler.destroy_node()
     rclpy.shutdown()
 
-def check_for_subscriptions(node):
+def check_for_subscriptions(node) -> list:
     # Spin the ndoe once
+    print("start spinning")
     rclpy.spin_once(node, timeout_sec=1.0)
+    print("finish spinning")
     if len(node.request_data_queue) == 0: #  If queue length is 0, do not update this queue
-        return None
+        return []
     else:
         temp = copy.deepcopy(node.request_data_queue)
         node.request_data_queue = []
