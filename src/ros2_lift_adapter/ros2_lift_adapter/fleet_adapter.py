@@ -62,8 +62,12 @@ class FleetAdapter(mqtt_client.MQTTClient):
     def publish_lift_request(self, mqttClient, request):
         # ok this needs to take a message from ROS2 DDS
         # Generate the request string
+        # Change service_state to 2, indicaing request s being served
+        request["service_state"] = "2"
         request_string = ""
+        print("Type of request-string: " + str(type(request_string)))
         for value in request.values():
+            print("type of value: "+ str(type(value)))
             request_string += value
             request_string += ";"
         try:
@@ -78,12 +82,13 @@ class FleetAdapter(mqtt_client.MQTTClient):
     # Generate a new request_id for lift requests
     def generate_new_request_id(self) -> str:
         # Get the most recent ID generated | format: ["request_id_here"]
-        hexID = self.DB.get_latest_request_ids(1)[0]
-
+        hexID = self.DB.get_latest_request_ids(1)[0][0]
+        print("hexID: " + str(hexID))
+        print("hexID type :" + str(type(hexID)))
         # Convert to dec, add one then convert back to hex
         decID = int(hexID, base=16)
         newDecID = decID + 1
-        newHexID = str(hex(newDecID))
+        newHexID = f"{newDecID:x}"
 
         return newHexID
     
@@ -92,7 +97,7 @@ class FleetAdapter(mqtt_client.MQTTClient):
 
         request = REQ_HANDLER.createAndQueueNewLiftRequest(request_id, request_level, destination_level)
         # Add request details to db
-        self.DB.add_new_lift_request(request)
+        self.DB.add_new_lift_request(request, time_stamp=round(time.time()))
 
     
     def attachCallbackFunctions(self, mqttClient):
@@ -131,12 +136,13 @@ def main():
         if REQ_HANDLER.lift_queue_is_empty() == False:
             CURRENT_REQUEST_ID = REQ_HANDLER.get_lift_requests_queue()[0]
             CURRENT_REQUEST_DATA = REQ_HANDLER.get_lift_requests_list()[0]
-
-            # Publish to fleet manager if lift has reached requested level and doors are opne
-            if (CURRENT_REQUEST_DATA["request_level"] == CURRENT_LIFT_STATE["level"]) and (CURRENT_LIFT_STATE == "O"):
-                sim.ROS2FleetHandler.publish_lift_state_to_fleet_manager(sim.lift_state)
-            
-            sim.publish_lift_request(mqttClient, CURRENT_REQUEST_DATA)
+            if CURRENT_REQUEST_DATA["service_state"] == "1":
+                # Publish to fleet manager if lift has reached requested level and doors are opne
+                if (CURRENT_REQUEST_DATA["request_level"] == CURRENT_LIFT_STATE["curr_level"]) and (CURRENT_LIFT_STATE == "O"):
+                    sim.ROS2FleetHandler.publish_lift_state_to_fleet_manager(sim.lift_state)
+                print("CURRENT REQUEST DATA: " + str(CURRENT_REQUEST_DATA))
+                print("type: " + str(type(CURRENT_REQUEST_DATA)))
+                sim.publish_lift_request(mqttClient, CURRENT_REQUEST_DATA)
 
         if sim.check_connection() == False:
             print("Connection lost. Attempting to reconnect")

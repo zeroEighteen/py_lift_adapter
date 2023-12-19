@@ -62,14 +62,13 @@ def main(args=None):
 
 def check_for_subscriptions(node) -> list:
     # Spin the ndoe once
-    print("start spinning")
     rclpy.spin_once(node, timeout_sec=1.0)
-    print("finish spinning")
     if len(node.request_data_queue) == 0: #  If queue length is 0, do not update this queue
         return []
     else:
         temp = copy.deepcopy(node.request_data_queue)
         node.request_data_queue = []
+        print("Verify ROS2_FLeet queu is cleared: " + str(node.request_data_queue))
         return temp
 
 if __name__ == '__main__':
