@@ -1,6 +1,7 @@
 # Import libraries
 import paho.mqtt.client as mqtt # Using Paho MQTT Python client
 import time
+import os
 
 # Import modules
 import ros2_lift_adapter.mqtt_client as mqtt_client
@@ -25,8 +26,11 @@ class LiftSim(mqtt_client.MQTTClient):
         # Creates RequestHandler object
         self.reqHandler = RequestHandler.RequestHandler()
 
+        CURRENT_DIRECTORY = os.getcwd()
+        DB_PATH = os.path.join(CURRENT_DIRECTORY, "src", "ros2_lift_adapter", "ros2_lift_adapter", "data", "lift_requests.db")
+
         # Create DB obeject
-        self.DB = db.DB()
+        self.DB = db.DB(DB_PATH)
 
         # Create and initate ROS2 object
         rclpy.init(args=None) 
