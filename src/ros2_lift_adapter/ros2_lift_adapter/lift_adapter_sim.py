@@ -202,7 +202,7 @@ def main():
     # Connect and start loop + subscribe to topic
     mqttClient.connect(sim.IP_ADDRESS, sim.PORT)
     mqttClient.loop_start()
-    sim.subscribeToTopics(mqttClient)
+    sim.subscribe_and_attach_callbacks_to_topics(mqttClient)
 
     # Main loop
     while True:
