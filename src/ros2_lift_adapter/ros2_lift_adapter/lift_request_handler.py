@@ -45,6 +45,9 @@ class RequestHandler():
             return True
         else: 
             return False
+    
+    def set_service_state(self, new_service_state: str):
+        self._lift_requests_list[0]["service_state"] = new_service_state
 
     # Removing lift requests
     def resolve_lift_request(self, request_id: str):

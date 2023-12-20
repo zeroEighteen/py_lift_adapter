@@ -15,9 +15,9 @@ from rclpy.node import Node
 from std_msgs.msg import String
 
 TOPICS = {
-        "Current Level" : "lift_sim/curr_level",
-        "Door State" : "lift_sim/door_state",
-        "Lift Request" : "lift_control/interface/current_lift_state",
+        "Door State" : "lift_adapter_transceiver/door_state",
+        "Lift Request" : "lift_adapter_transceiver/message_from_fleet",
+        "To Fleet": "lift_adapter_transceiver/next_message_to_fleet"
 }
 
 class LiftSim(mqtt_client.MQTTClient):
@@ -47,11 +47,9 @@ class LiftSim(mqtt_client.MQTTClient):
 
     # Consolidated function to subscribe to all required topics    
     def subscribe_and_attach_callbacks_to_topics(self, mqttClient):
-        mqttClient.subscribe(TOPICS["Current Level"])
         mqttClient.subscribe(TOPICS["Door State"]) 
         mqttClient.subscribe(TOPICS["Lift Request"]) 
 
-        mqttClient.message_callback_add(TOPICS["Current Level"], self.update_lift_state_current_level)
         mqttClient.message_callback_add(TOPICS["Door State"], self.update_lift_state_door_state)
         mqttClient.message_callback_add(TOPICS["Lift Request",], self.update_lift_request_state)
 
@@ -69,16 +67,29 @@ class LiftSim(mqtt_client.MQTTClient):
     def destination_level_reached_check(self) -> bool:
         LIFT_REQUEST_QUEUE_IS_NOT_EMPTY = len(self.reqHandler.get_lift_requests_queue()) > 0
         DOOR_STATE_IS_OPENED = self.get_door_state() == "Opened" 
-        CURRENT_LEVEL_IS_EQUAL_TO_DESTINATION_LEVEL = self.get_current_level() == self.reqHandler.get_lift_requests_list()[0]["destination_level"]
+        CURRENT_LEVEL_IS_EQUAL_TO_DESTINATION_LEVEL = (self.get_current_level() == self.reqHandler.get_lift_requests_list()[0]["destination_level"])
 
         if LIFT_REQUEST_QUEUE_IS_NOT_EMPTY and DOOR_STATE_IS_OPENED and CURRENT_LEVEL_IS_EQUAL_TO_DESTINATION_LEVEL:
             return True
     
     # Callback function: Update current level of _lift_state upon receiving request
-    def update_lift_state_current_level(self, client ,userdata, msg):
+    # def update_lift_state_current_level(self, client ,userdata, msg):
+    #     try: 
+    #         # Decode value from mqtt message
+    #         level = msg.payload.decode("utf-8")
+    #         # Add leading zero if need be
+    #         if len(level) == 1:
+    #            level = "0" + level
+    #         # Update lift sim state with current level
+    #         self._lift_state["current_level"] = level
+    #         print(f"Updated Lift State: Floor: {self._lift_state['current_level']}")
+    #     except Exception as e:
+    #         self._lift_state["current_level"] = None
+    #         print(f"Error in updating 'current_level' of _lift_state: {e}\n 'current_level' set to None")
+        
+    def update_lift_state_current_level(self, curr_level):
         try: 
-            # Decode value from mqtt message
-            level = msg.payload.decode("utf-8")
+            level = curr_level
             # Add leading zero if need be
             if len(level) == 1:
                level = "0" + level
@@ -89,7 +100,6 @@ class LiftSim(mqtt_client.MQTTClient):
             self._lift_state["current_level"] = None
             print(f"Error in updating 'current_level' of _lift_state: {e}\n 'current_level' set to None")
 
-    
     # Callback function: Update door state of  _lift_state upon receiving request
     def update_lift_state_door_state(self, client, userdata, msg):
         try: 
@@ -98,9 +108,14 @@ class LiftSim(mqtt_client.MQTTClient):
 
             REACHED_DESTINATION_LEVEL = self.destination_level_reached_check()
             CURRENT_LIFT_REQUEST_ID = self.reqHandler.get_lift_requests_queue()[0]
+            CURRENT_LIFT_REQUEST_DATA = self.reqHandler.get_lift_requests_list()[0]
 
             if REACHED_DESTINATION_LEVEL:
+               #Publish back to fleet
+               CURRENT_LIFT_REQUEST_DATA["service_state"] = "3"
+               self.publish_lift_requests_to_fleet_manager(CURRENT_LIFT_REQUEST_DATA, client)
                self.reqHandler.resolve_lift_request(CURRENT_LIFT_REQUEST_ID)
+               self.DB.update_service_state(CURRENT_LIFT_REQUEST_ID, "3")
                self.LiftROS2Handler.publish_robot_exit_status_to_robot("leave")
 
         except Exception as e:
@@ -112,11 +127,21 @@ class LiftSim(mqtt_client.MQTTClient):
         try:
             # Parse decoded message
             allInfo =  msg.payload.decode("utf-8")
-            allInfo = allInfo.split(";")
-            request_id = allInfo[1]
-            request_level = allInfo[2]
-            destination_level = allInfo[3]
-    
+            IS_BLANK_MESSAGE = "<" in allInfo
+            if not IS_BLANK_MESSAGE:
+                allInfo = allInfo.split(";")
+                request_id = allInfo[1]
+                request_level = allInfo[2]
+                destination_level = allInfo[3]
+
+                # update curr_level
+                curr_level = allInfo[4]
+                self.update_lift_state_current_level(curr_level)  
+            else:
+                curr_level = allInfo[:-2]
+                self.update_lift_state_current_level(curr_level) 
+
+
             # If request is not already queued, create a new request
             queue = self.reqHandler.get_lift_requests_queue()
             if (request_id in queue) == False:
@@ -136,6 +161,18 @@ class LiftSim(mqtt_client.MQTTClient):
 
         except Exception as e:
             print(f"Error in publishing lift request to 'button_pressed': {e}")
+
+    def publish_lift_requests_to_fleet_manager(self, data, mqttClient):
+        request_string = ""
+        for value in data.values():
+            request_string += value
+            request_string += ";"
+        try:
+            pubMsg = mqttClient.publish(topic=TOPICS["To Fleet"], payload=request_string.encode('utf-8'), qos=0)
+            #Library methods, idk what they do
+            pubMsg.wait_for_publish()
+        except Exception as e:
+            print(f"Error in publishing lift requests to fleet manager: {e}")
 
 def publish_lift_state_update(sim, mqttClient):
 

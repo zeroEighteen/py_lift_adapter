@@ -19,11 +19,9 @@ import ros2_lift_adapter.ros2_fleet as ros2_fleet
 # publish to fleet_control/qr_display/qrcode_content/lift_request
 
 TOPICS = {
-    "Debug Requests": "fleet_adapter/debug_requests",
-    "Lift Request": "fleet_control/qr_display/qrcode_content/lift_request",
-    "Fleet Lift State": "fleet_adapter/lift_state",
-    "Lift Sim Door State": "lift_sim/door_state",
-    "Lift Sim Curr Level": "lift_sim/curr_level"
+    "To Lift": "fleet_adapter_transceiver/next_message_to_lift/",
+    "From Lift": "fleet_adapter_transceiver/message_from_lift/*",
+    "Lift Sim State": "fleet_adapter_transceiver/door_state/*",
 }   
 
 REQ_HANDLER = RequestHandler.RequestHandler()
@@ -44,7 +42,7 @@ class FleetAdapter(mqtt_client.MQTTClient):
 
         self.lift_state = {
             "curr_level": "00",
-            "door_state": "X", # X represents closed, O represents open
+            "door_state": "Closed", # X represents closed, O represents open
             "door_state_changes" : "False",
             "curr_level_changes" : "False"
         }
@@ -53,7 +51,9 @@ class FleetAdapter(mqtt_client.MQTTClient):
         return self.lift_state
 
     def subscribeToTopics(self, mqttClient):
-        mqttClient.subscribe(TOPICS["Fleet Lift State"])
+        mqttClient.subscribe(TOPICS["From Lift"])
+        mqttClient.subscribe(TOPICS["Lift Sim State"])
+
         # mqttClient.subscribe(TOPICS["Debug Requests"])
     
     def update_lift_state(self, client, userdata, msg):
@@ -80,31 +80,25 @@ class FleetAdapter(mqtt_client.MQTTClient):
         for value in request.values():
             request_string += value
             request_string += ";"
+        # Customise topic to publish to
+        CUSTOMISED_TOPIC = TOPICS["To Lift"] + self.lift_state["curr_level"]
         try:
-            pubMsg = mqttClient.publish(topic=TOPICS["Lift Request"], payload=request_string.encode('utf-8'), qos=0)
+            pubMsg = mqttClient.publish(topic=CUSTOMISED_TOPIC, payload=request_string.encode('utf-8'), qos=0)
             #Library methods, idk what they do
             pubMsg.wait_for_publish()
             print(f"Lift Request {request_string[:3]} successfully published")
 
         except Exception as e:
             print(f"Error in publishing lift request to 'button_pressed': {e}")
-    
-    def publish_curr_level(self, mqttClient, lift_state):
-        CURR_LEVEL = lift_state["curr_level"]
-        try:
-            pubMsg = mqttClient.publish(topic=TOPICS["Lift Sim Curr Level"], payload=CURR_LEVEL.encode('utf-8'), qos=0)
-            pubMsg.wait_for_publish()
-            print(f"Lift Level {CURR_LEVEL} successfully published")
 
-        except Exception as e:
-            print(f"Error in publishing lift request to 'button_pressed': {e}")
-    
-    def publish_door_state(self, mqttClient, lift_state):
-        DOOR_STATE = lift_state["door_state"]
+    def publish_blank_request_and_curr_level(self, mqttClient):
+        CURR_LEVEL = self.lift_state["curr_level"]
+        msg = "<blank>;" + CURR_LEVEL
         try:
-            pubMsg = mqttClient.publish(topic=TOPICS["Lift Sim Door State"], payload=DOOR_STATE.encode('utf-8'), qos=0)
+            pubMsg = mqttClient.publish(topic=TOPICS["Lift Request"], payload=CURR_LEVEL.encode('utf-8'), qos=0)
+            #Library methods, idk what they do
             pubMsg.wait_for_publish()
-            print(f"Door State '{DOOR_STATE}' successfully published")
+            print(f"Blank Lift Request for Level {CURR_LEVEL} successfully published")
 
         except Exception as e:
             print(f"Error in publishing lift request to 'button_pressed': {e}")
@@ -126,11 +120,26 @@ class FleetAdapter(mqtt_client.MQTTClient):
         request = REQ_HANDLER.createAndQueueNewLiftRequest(request_id, request_level, destination_level)
         # Add request details to db
         self.DB.add_new_lift_request(request, time_stamp=round(time.time()))
+    
+    def complete_lift_request(self, request_id):
+        REQ_HANDLER.resolve_lift_request(request_id)
+        self.DB.update_service_state(request_id, "3")
+        print(f"Resolved lift request ID {request_id}")
+    
+    def update_current_request(self, client, userdata, msg):
+        msg = msg.payload.decode("utf-8")
+        data = msg.split(";")
+        # Check if service state is 3
+        SERVICE_STATE = data[3]
+        if SERVICE_STATE == "3":
+            REQ_HANDLER.set_service_state("3")
+        
 
     
     def attachCallbackFunctions(self, mqttClient):
-        mqttClient.message_callback_add(TOPICS["Lift Sim Curr Level"], self.update_lift_state)
-        mqttClient.message_callback_add(TOPICS["Lift Sim Door State"], self.update_lift_state)
+        mqttClient.message_callback_add(TOPICS["Lift Sim State"], self.update_lift_state)
+        mqttClient.message_callback_add(TOPICS["From Lift"], self.update_current_request)
+        
 
 def main():
     IP_ADDRESS = "10.168.2.219"
@@ -158,7 +167,7 @@ def main():
             sim.publish_curr_level(mqttClient, sim.get_lift_state())
             
         # Get new request from the ros2 subprocess
-        print("Checking for subscriptions")
+        print("Checking for requests from ROS2 DDS")
         requestData = ros2_fleet.check_for_subscriptions(sim.ROS2FleetHandler)
         if requestData != None: # If the list of request data isnt empty,
             for data in requestData:
@@ -167,11 +176,22 @@ def main():
         if REQ_HANDLER.lift_queue_is_empty() == False:
             CURRENT_REQUEST_ID = REQ_HANDLER.get_lift_requests_queue()[0]
             CURRENT_REQUEST_DATA = REQ_HANDLER.get_lift_requests_list()[0]
-            if CURRENT_REQUEST_DATA["service_state"] == "1":
+            if CURRENT_REQUEST_DATA["service_state"] == "1": # If the current lift request service state has nto been served
                 # Publish to fleet manager if lift has reached requested level and doors are opne
                 if (CURRENT_REQUEST_DATA["request_level"] == CURRENT_LIFT_STATE["curr_level"]) and (CURRENT_LIFT_STATE == "O"):
                     sim.ROS2FleetHandler.publish_lift_state_to_fleet_manager(sim.lift_state)
-                sim.publish_lift_request(mqttClient, CURRENT_REQUEST_DATA)
+                
+                sim.publish_lift_request(mqttClient, CURRENT_REQUEST_DATA) # Publish lift request to optical transceiver
+            else:
+                # if request has been served, send blank message
+                sim.publish_blank_request_and_curr_level(mqttClient) 
+
+            # Check if current lift request has been served
+            if CURRENT_REQUEST_DATA["service_state"] == "3":
+                sim.complete_lift_request(CURRENT_REQUEST_ID)
+        else:
+            # publish blank message
+            sim.publish_blank_request_and_curr_level(mqttClient) 
 
         if sim.check_connection() == False:
             print("Connection lost. Attempting to reconnect")
