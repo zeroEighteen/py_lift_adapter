@@ -152,7 +152,7 @@ def publish_lift_state_update(sim, mqttClient):
 # Start of script logic ----------------------------
 def main():
     mqttClient = mqtt.Client("lift_adapter") # Create client object
-    sim = LiftSim("192.168.18.3")
+    sim = LiftSim("10.168.2.219", 1883)
 
     # Attach on_connect and on_disconnect functions
     mqttClient.on_connect = sim.on_connected
