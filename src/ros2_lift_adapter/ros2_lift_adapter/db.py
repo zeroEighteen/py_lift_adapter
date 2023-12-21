@@ -56,7 +56,7 @@ class DB():
         print(f"Publish state for Request {request_id} has been updated.")
 
     def update_service_state(self, request_id: str, service_state: str):
-        res = self.CURSOR.execute(UPDATE_SERVICE_STATE.format(publish_state=service_state, request_id=request_id))
+        res = self.CURSOR.execute(UPDATE_SERVICE_STATE.format(service_state=service_state, request_id=request_id))
         self.CONNECTION.commit()
 
         print(f"Service state for Request {request_id} has been updated.")

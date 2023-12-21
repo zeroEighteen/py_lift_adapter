@@ -54,6 +54,12 @@ class DB():
         self.CONNECTION.commit()
 
         print(f"Publish state for Request {request_id} has been updated.")
+
+    def update_service_state(self, request_id: str, service_state: str):
+        res = self.CURSOR.execute(UPDATE_SERVICE_STATE.format(service_state=service_state, request_id=request_id))
+        self.CONNECTION.commit()
+
+        print(f"Service state for Request {request_id} has been updated.")
     
 
 class FleetDB(DB):
@@ -91,6 +97,12 @@ WHERE request_id = "{request_id}"
 UPDATE_PUBLISH_STATE = """
 UPDATE Requests
 SET publish_state = {publish_state}
+WHERE request_id = "{request_id}"
+"""
+
+UPDATE_SERVICE_STATE = """
+UPDATE Requests
+SET service_state = {service_state}
 WHERE request_id = "{request_id}"
 """
 # Testing script

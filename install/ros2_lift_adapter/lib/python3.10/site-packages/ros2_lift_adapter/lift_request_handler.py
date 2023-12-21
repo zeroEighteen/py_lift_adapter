@@ -6,7 +6,7 @@ LIFT_REQUEST_TEMPLATE = {
     "request_id": "123456",
     "request_level": None, 
     "destination_level": None, 
-    "service_state" : "0",
+    "service_state" : "1",
     "publish_state" : "0"
 }
 
@@ -45,6 +45,9 @@ class RequestHandler():
             return True
         else: 
             return False
+    
+    def set_service_state(self, new_service_state: str):
+        self._lift_requests_list[0]["service_state"] = new_service_state
 
     # Removing lift requests
     def resolve_lift_request(self, request_id: str):
@@ -72,7 +75,6 @@ class RequestHandler():
         # Queuing the new lift request
         self.enqueue_lift_requests_queue(request_id)
         self.enqueue_lift_requests_list(newReq)
-        print("newReq: " + str(newReq))
 
         print(f"New Lift Request queued. \nID: {request_id} \nRequest Floor: {request_level} \nDestination Floor:{destination_level}")
         return newReq

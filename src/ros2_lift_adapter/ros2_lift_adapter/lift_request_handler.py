@@ -6,7 +6,7 @@ LIFT_REQUEST_TEMPLATE = {
     "request_id": "123456",
     "request_level": None, 
     "destination_level": None, 
-    "service_state" : "0",
+    "service_state" : "1",
     "publish_state" : "0"
 }
 

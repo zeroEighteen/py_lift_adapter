@@ -27,10 +27,10 @@ class LiftSim(mqtt_client.MQTTClient):
         self.reqHandler = RequestHandler.RequestHandler()
 
         CURRENT_DIRECTORY = os.getcwd()
-        DB_PATH = os.path.join(CURRENT_DIRECTORY, "src", "ros2_lift_adapter", "ros2_lift_adapter", "data", "lift_requests.db")
+        self.DB_PATH = os.path.join(CURRENT_DIRECTORY, "src", "ros2_lift_adapter", "ros2_lift_adapter", "data", "lift_requests_copy.db")
 
         # Create DB obeject
-        self.DB = db.DB(DB_PATH)
+        self.DB = db.DB(self.DB_PATH)
 
         # Create and initate ROS2 object
         rclpy.init(args=None) 
@@ -45,13 +45,15 @@ class LiftSim(mqtt_client.MQTTClient):
             "door_state": "X" # X indicates closed, O indicates open
         }
 
+        self.to_fleet = ""
+
     # Consolidated function to subscribe to all required topics    
     def subscribe_and_attach_callbacks_to_topics(self, mqttClient):
         mqttClient.subscribe(TOPICS["Door State"]) 
         mqttClient.subscribe(TOPICS["Lift Request"]) 
 
         mqttClient.message_callback_add(TOPICS["Door State"], self.update_lift_state_door_state)
-        mqttClient.message_callback_add(TOPICS["Lift Request",], self.update_lift_request_state)
+        mqttClient.message_callback_add(TOPICS["Lift Request"], self.update_lift_request_state)
 
         print(f"Subscribed to topics.")
 
@@ -65,12 +67,15 @@ class LiftSim(mqtt_client.MQTTClient):
 
     # Check if the lift has reached the destination floor. If so, return True
     def destination_level_reached_check(self) -> bool:
+        print("Checking Destination")
         LIFT_REQUEST_QUEUE_IS_NOT_EMPTY = len(self.reqHandler.get_lift_requests_queue()) > 0
         DOOR_STATE_IS_OPENED = self.get_door_state() == "Opened" 
         CURRENT_LEVEL_IS_EQUAL_TO_DESTINATION_LEVEL = (self.get_current_level() == self.reqHandler.get_lift_requests_list()[0]["destination_level"])
-
+        print("Finished checking Destination")
         if LIFT_REQUEST_QUEUE_IS_NOT_EMPTY and DOOR_STATE_IS_OPENED and CURRENT_LEVEL_IS_EQUAL_TO_DESTINATION_LEVEL:
+            print("reached destination level")
             return True
+        
     
     # Callback function: Update current level of _lift_state upon receiving request
     # def update_lift_state_current_level(self, client ,userdata, msg):
@@ -106,18 +111,6 @@ class LiftSim(mqtt_client.MQTTClient):
             self._lift_state["door_state"] = msg.payload.decode("utf-8")
             print(f"Updated Lift State: Door State: {self._lift_state['door_state']}")
 
-            REACHED_DESTINATION_LEVEL = self.destination_level_reached_check()
-            CURRENT_LIFT_REQUEST_ID = self.reqHandler.get_lift_requests_queue()[0]
-            CURRENT_LIFT_REQUEST_DATA = self.reqHandler.get_lift_requests_list()[0]
-
-            if REACHED_DESTINATION_LEVEL:
-               #Publish back to fleet
-               CURRENT_LIFT_REQUEST_DATA["service_state"] = "3"
-               self.publish_lift_requests_to_fleet_manager(CURRENT_LIFT_REQUEST_DATA, client)
-               self.reqHandler.resolve_lift_request(CURRENT_LIFT_REQUEST_ID)
-               self.DB.update_service_state(CURRENT_LIFT_REQUEST_ID, "3")
-               self.LiftROS2Handler.publish_robot_exit_status_to_robot("leave")
-
         except Exception as e:
             self._lift_state["door_state"] = None
             print(f"Error in updating 'door_state' of _lift_state: {e}\n 'door_state' set to None")
@@ -129,25 +122,58 @@ class LiftSim(mqtt_client.MQTTClient):
             allInfo =  msg.payload.decode("utf-8")
             IS_BLANK_MESSAGE = "<" in allInfo
             if not IS_BLANK_MESSAGE:
+                print("not blank")
                 allInfo = allInfo.split(";")
-                request_id = allInfo[1]
-                request_level = allInfo[2]
-                destination_level = allInfo[3]
+                request_id = allInfo[0]
+                request_level = allInfo[1]
+                destination_level = allInfo[2]
 
                 # update curr_level
-                curr_level = allInfo[4]
+                curr_level = allInfo[5]
                 self.update_lift_state_current_level(curr_level)  
+
+                # If request is not already queued, create a new request
+                queue = self.reqHandler.get_lift_requests_queue()
+                print(f"queue: {queue}")
+                if len(queue) > 0:
+                    CURR_REQUEST_ID_SMALLER_THAN_NEW_REQUEST_ID = request_id < queue[0]
+                else:
+                    CURR_REQUEST_ID_SMALLER_THAN_NEW_REQUEST_ID = True
+                # for topic cleaning purposes
+                print("pre-topic cleaning")
+                if (request_id in queue) == False and CURR_REQUEST_ID_SMALLER_THAN_NEW_REQUEST_ID:
+                    newRequest = self.reqHandler.createAndQueueNewLiftRequest(request_id, request_level, destination_level)
+                    newDB = db.DB(self.DB_PATH)
+                    newDB.add_new_lift_request(newRequest, time_stamp=round(time.time()))
+
             else:
-                curr_level = allInfo[:-2]
+                print("blank")
+                curr_level = allInfo.strip(">")
+                print(f"post strip: {curr_level}")
+                curr_level = curr_level[11:]
+                print(f"post strip 2: {curr_level}")
+                if len(curr_level) == 1:
+                    curr_level = "0" + curr_level
                 self.update_lift_state_current_level(curr_level) 
+            if not self.reqHandler.lift_queue_is_empty():
+                print("queue empty")
+                CURRENT_LIFT_REQUEST_ID = self.reqHandler.get_lift_requests_queue()[0]
+                CURRENT_LIFT_REQUEST_DATA = self.reqHandler.get_lift_requests_list()[0]
+                print("checkpoint")
 
+                REACHED_DESTINATION_LEVEL = self.destination_level_reached_check()
+                if REACHED_DESTINATION_LEVEL:
+                    #Publish back to fleet
+                    CURRENT_LIFT_REQUEST_DATA["service_state"] = "3"
+                    print("Update service state")
+                    request_string = ""
+                    for value in CURRENT_LIFT_REQUEST_DATA.values():
+                        request_string += value
+                        request_string += ";"
+                    print("Finished constructing message")
+                    self.to_fleet = request_string
+                    
 
-            # If request is not already queued, create a new request
-            queue = self.reqHandler.get_lift_requests_queue()
-            if (request_id in queue) == False:
-                newRequest = self.reqHandler.createAndQueueNewLiftRequest(request_id, request_level, destination_level)
-                self.DB.add_new_lift_request(newRequest, time_stamp=round(time.time()))
-            
         except Exception as e:
             print(f"Error in updating lift_request_state: {e}")
 
@@ -162,15 +188,23 @@ class LiftSim(mqtt_client.MQTTClient):
         except Exception as e:
             print(f"Error in publishing lift request to 'button_pressed': {e}")
 
-    def publish_lift_requests_to_fleet_manager(self, data, mqttClient):
-        request_string = ""
-        for value in data.values():
-            request_string += value
-            request_string += ";"
+    def publish_lift_request_to_fleet_adapter(self, data, mqttClient):
         try:
-            pubMsg = mqttClient.publish(topic=TOPICS["To Fleet"], payload=request_string.encode('utf-8'), qos=0)
+            CURRENT_LIFT_REQUEST_ID = self.reqHandler.get_lift_requests_queue()[0]
+            CURRENT_LIFT_REQUEST_DATA = self.reqHandler.get_lift_requests_list()[0]
+            pubMsg = mqttClient.publish(topic=TOPICS["To Fleet"], payload=data.encode('utf-8'), qos=0)
+            print(f"Waintin for publish: {pubMsg.rc}")
             #Library methods, idk what they do
             pubMsg.wait_for_publish()
+            print(f"is published? : {pubMsg.is_published}")
+            self.reqHandler.resolve_lift_request(CURRENT_LIFT_REQUEST_ID)
+            print("Resolve Lift Request")
+            newDB = db.DB(self.DB_PATH)
+            newDB.update_service_state(CURRENT_LIFT_REQUEST_ID, "3")
+            print("Uodate DB's service state")
+            # self.LiftROS2Handler.publish_robot_exit_status_to_robot("leave")
+            # Reset to_fleet
+            self.to_fleet = ""
         except Exception as e:
             print(f"Error in publishing lift requests to fleet manager: {e}")
 
@@ -178,7 +212,10 @@ def publish_lift_state_update(sim, mqttClient):
 
     CURRENT_REQUEST_ID = sim.reqHandler.get_lift_requests_queue()[0]
     CURRENT_REQUEST_DATA = sim.reqHandler.get_lift_requests_list()[0]
-
+    print(f"CUrret sim level: {sim.get_current_level()}")
+    print(f"CUrret sim level: {CURRENT_REQUEST_DATA['request_level']}")
+    print(f"Is current level = request level?; {sim.get_current_level() == CURRENT_REQUEST_DATA['request_level']}")
+    print(f"CUrrent publish state: {CURRENT_REQUEST_DATA['publish_state']}")
     if CURRENT_REQUEST_DATA["publish_state"] == "0":
         sim.publish_lift_requests_to_lift_sim(CURRENT_REQUEST_DATA["request_level"], mqttClient)
         sim.reqHandler.set_lift_request_publish_state("1")
@@ -193,7 +230,7 @@ def publish_lift_state_update(sim, mqttClient):
 # Start of script logic ----------------------------
 def main():
     mqttClient = mqtt.Client("lift_adapter") # Create client object
-    sim = LiftSim("10.168.2.219", 1883)
+    sim = LiftSim("192.168.18.12", 1883)
 
     # Attach on_connect and on_disconnect functions
     mqttClient.on_connect = sim.on_connected
@@ -214,6 +251,10 @@ def main():
         # Attempt to publish lift state update if the queue is not empty
         if sim.reqHandler.lift_queue_is_empty() == False:
             publish_lift_state_update(sim, mqttClient)
+
+        # check if need to publish back to fleet
+        if sim.to_fleet != "":
+            sim.publish_lift_request_to_fleet_adapter(sim.to_fleet, mqttClient)
         
         # Check if connection is present
         if sim.check_connection() == False:
